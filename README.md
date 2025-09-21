@@ -9,9 +9,7 @@ Make sure you have Python installed on your machine. You can download it from [p
 ## Setup
 
 1. Clone the repository:
-   ```
 
-   ```
 
 2. Create a virtual environment:
    ```
@@ -41,7 +39,3 @@ python app.py
 ```
 
 The application will be accessible at `http://127.0.0.1:5000/`.
-
-## License
-
-This project is licensed under the MIT License.
