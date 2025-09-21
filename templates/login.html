@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Job Fair - Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>University Job Fair</h1>
+            <h2>Login</h2>
+            
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                <span class="flash-text">{{ message }}</span>
+                                <button class="flash-dismiss" onclick="dismissFlash(this)">&times;</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Don't have an account? <a href="{{ url_for('register') }}">Register as a candidate</a></p>
+            </div>
+            
+            <div class="demo-credentials">
+                <h3>Demo Credentials:</h3>
+                <p><strong>Admin:</strong> username: admin, password: admin123</p>
+                <p><strong>Applicant:</strong> username: john_doe, password: password123</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function dismissFlash(button) {
+            const flashMessage = button.parentElement;
+            flashMessage.style.opacity = '0';
+            flashMessage.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                flashMessage.remove();
+                // Remove the entire flash-messages container if no messages left
+                const flashContainer = document.querySelector('.flash-messages');
+                if (flashContainer && flashContainer.children.length === 0) {
+                    flashContainer.remove();
+                }
+            }, 300);
+        }
+
+        // Auto-dismiss flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    const dismissBtn = message.querySelector('.flash-dismiss');
+                    if (dismissBtn && message.parentElement) {
+                        dismissFlash(dismissBtn);
+                    }
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

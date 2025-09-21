@@ -1,0 +1,92 @@
+[
+    {
+        "id": 10000001,
+        "username": "admin",
+        "password": "admin123",
+        "user_type": "admin"
+    },
+    {
+        "id": 10000002,
+        "username": "john_doe",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000001
+    },
+    {
+        "id": 10000003,
+        "username": "jane_smith",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000002
+    },
+    {
+        "id": 10000004,
+        "username": "mike_johnson",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000003
+    },
+    {
+        "id": 10000005,
+        "username": "sarah_wilson",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000004
+    },
+    {
+        "id": 10000006,
+        "username": "david_brown",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000005
+    },
+    {
+        "id": 10000007,
+        "username": "emily_davis",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000006
+    },
+    {
+        "id": 10000008,
+        "username": "alex_martinez",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000007
+    },
+    {
+        "id": 10000009,
+        "username": "lisa_taylor",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000008
+    },
+    {
+        "id": 10000010,
+        "username": "chris_anderson",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000009
+    },
+    {
+        "id": 10000011,
+        "username": "amanda_thompson",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000010
+    },
+    {
+        "id": 10000012,
+        "username": "ryan_garcia",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000011
+    },
+    {
+        "id": 10000013,
+        "username": "nicole_lee",
+        "password": "password123",
+        "user_type": "candidate",
+        "candidate_id": 20000012
+    }
+]

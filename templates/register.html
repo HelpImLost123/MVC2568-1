@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Job Fair - Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="register-form">
+            <h1>University Job Fair</h1>
+            <h2>Create Your Account</h2>
+            
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                <span class="flash-text">{{ message }}</span>
+                                <button class="flash-dismiss" onclick="dismissFlash(this)">&times;</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('register') }}" id="registerForm" novalidate>
+                <!-- Account Information -->
+                <div class="form-section">
+                    <h3>Account Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="username">Username: <span class="required">*</span></label>
+                        <input type="text" id="username" name="username" required minlength="3" 
+                               placeholder="Enter a unique username">
+                        <div class="field-hint">Minimum 3 characters</div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password: <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" required minlength="6" 
+                                   placeholder="Create a secure password">
+                            <div class="field-hint">Minimum 6 characters</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password: <span class="required">*</span></label>
+                            <input type="password" id="confirm_password" name="confirm_password" required 
+                                   placeholder="Re-enter your password">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first_name">First Name: <span class="required">*</span></label>
+                            <input type="text" id="first_name" name="first_name" required 
+                                   placeholder="Your first name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="last_name">Last Name: <span class="required">*</span></label>
+                            <input type="text" id="last_name" name="last_name" required 
+                                   placeholder="Your last name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address: <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="your.email@student.edu">
+                        <div class="field-hint">Use your student email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number: <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required 
+                               placeholder="(555) 123-4567">
+                    </div>
+                </div>
+                
+                <!-- Academic Information -->
+                <div class="form-section">
+                    <h3>Academic Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="major">Major: <span class="required">*</span></label>
+                            <input type="text" id="major" name="major" required 
+                                   placeholder="Enter your major (e.g., Computer Science)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gpa">GPA: <span class="required">*</span></label>
+                            <input type="number" id="gpa" name="gpa" required 
+                                   min="0.0" max="4.0" step="0.1" 
+                                   placeholder="3.5">
+                            <div class="field-hint">Scale of 0.0 - 4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="register-btn">Create Account</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="{{ url_for('login') }}">Sign in here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function dismissFlash(button) {
+            const flashMessage = button.parentElement;
+            flashMessage.style.opacity = '0';
+            flashMessage.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                flashMessage.remove();
+                const flashContainer = document.querySelector('.flash-messages');
+                if (flashContainer && flashContainer.children.length === 0) {
+                    flashContainer.remove();
+                }
+            }, 300);
+        }
+
+        // Auto-dismiss flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    const dismissBtn = message.querySelector('.flash-dismiss');
+                    if (dismissBtn && message.parentElement) {
+                        dismissFlash(dismissBtn);
+                    }
+                }, 5000);
+            });
+        });
+
+        // Client-side validation
+        const form = document.getElementById('registerForm');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const email = document.getElementById('email');
+
+        // Real-time password confirmation validation
+        confirmPassword.addEventListener('input', function() {
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity('Passwords do not match');
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        });
+
+        // Email format validation
+        email.addEventListener('input', function() {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email.value) && email.value !== '') {
+                email.setCustomValidity('Please enter a valid email address');
+            } else {
+                email.setCustomValidity('');
+            }
+        });
+
+        // Form submission validation
+        form.addEventListener('submit', function(e) {
+            // Check password match
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+                confirmPassword.focus();
+                return false;
+            }
+
+            // Check email format
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email.value)) {
+                e.preventDefault();
+                alert('Please enter a valid email address!');
+                email.focus();
+                return false;
+            }
+
+            // Check GPA range
+            const gpa = document.getElementById('gpa');
+            const gpaValue = parseFloat(gpa.value);
+            if (isNaN(gpaValue) || gpaValue < 0.0 || gpaValue > 4.0) {
+                e.preventDefault();
+                alert('GPA must be between 0.0 and 4.0!');
+                gpa.focus();
+                return false;
+            }
+        });
+
+        // Phone number formatting
+        const phone = document.getElementById('phone');
+        phone.addEventListener('input', function() {
+            let value = phone.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+            } else if (value.length >= 3) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            }
+            phone.value = value;
+        });
+    </script>
+</body>
+</html>

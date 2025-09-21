@@ -1,0 +1,74 @@
+[
+    {
+        "id": 50000001,
+        "name": "Tech Corp",
+        "contact_email": "hr@techcorp.com",
+        "location": "San Francisco, CA"
+    },
+    {
+        "id": 50000002,
+        "name": "Marketing Solutions Inc",
+        "contact_email": "careers@marketingsolutions.com",
+        "location": "New York, NY"
+    },
+    {
+        "id": 50000003,
+        "name": "Data Insights LLC",
+        "contact_email": "jobs@datainsights.com",
+        "location": "Chicago, IL"
+    },
+    {
+        "id": 50000004,
+        "name": "Finance Partners",
+        "contact_email": "recruitment@financepartners.com",
+        "location": "Boston, MA"
+    },
+    {
+        "id": 50000005,
+        "name": "Creative Designs Studio",
+        "contact_email": "talent@creativedesigns.com",
+        "location": "Austin, TX"
+    },
+    {
+        "id": 50000006,
+        "name": "SecureNet Technologies",
+        "contact_email": "hiring@securenet.com",
+        "location": "Washington, DC"
+    },
+    {
+        "id": 50000007,
+        "name": "Growth Ventures",
+        "contact_email": "opportunities@growthventures.com",
+        "location": "Seattle, WA"
+    },
+    {
+        "id": 50000008,
+        "name": "BioTech Innovations",
+        "contact_email": "research-jobs@biotechinnovations.com",
+        "location": "San Diego, CA"
+    },
+    {
+        "id": 50000009,
+        "name": "Digital Media Hub",
+        "contact_email": "creative@digitalmediahub.com",
+        "location": "Los Angeles, CA"
+    },
+    {
+        "id": 50000010,
+        "name": "Logistics Plus",
+        "contact_email": "operations@logisticsplus.com",
+        "location": "Atlanta, GA"
+    },
+    {
+        "id": 50000011,
+        "name": "SoftTest Solutions",
+        "contact_email": "qa-careers@softtestsolutions.com",
+        "location": "Portland, OR"
+    },
+    {
+        "id": 50000012,
+        "name": "SalesForce Pro",
+        "contact_email": "sales-jobs@salesforcepro.com",
+        "location": "Denver, CO"
+    }
+]

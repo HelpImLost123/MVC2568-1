@@ -1,0 +1,102 @@
+[
+    {
+        "id": 30000001,
+        "title": "Software Engineer Intern",
+        "company_id": 50000001,
+        "description": "Looking for a motivated software engineering intern to join our team. Experience with Python, JavaScript, and databases preferred.",
+        "requirements": ["Computer Science major", "Python experience", "Problem-solving skills"],
+        "posted_date": "2025-09-15",
+        "application_deadline": "2025-10-15",
+        "application_status": "open"
+    },
+    {
+        "id": 30000002,
+        "title": "Marketing Assistant",
+        "company_id": 50000002,
+        "description": "Entry-level marketing position supporting digital marketing campaigns and content creation.",
+        "requirements": ["Marketing or Communications major", "Social media experience", "Creative thinking"],
+        "posted_date": "2025-09-18",
+        "application_deadline": "2025-10-20",
+        "application_status": "open"
+    },
+    {
+        "id": 30000003,
+        "title": "Data Analyst Intern",
+        "company_id": 50000003,
+        "description": "Analyze business data and create reports to support decision-making processes.",
+        "requirements": ["Statistics or Math major", "Excel proficiency", "SQL knowledge preferred"],
+        "posted_date": "2025-09-20",
+        "application_deadline": "2025-10-25",
+        "application_status": "open"
+    },
+    {
+        "id": 30000004,
+        "title": "Financial Analyst",
+        "company_id": 50000004,
+        "description": "Support financial planning and analysis activities for our growing company.",
+        "requirements": ["Finance or Economics major", "Analytical skills", "Attention to detail"],
+        "posted_date": "2025-09-19",
+        "application_deadline": "2025-10-30",
+        "application_status": "open"
+    },
+    {
+        "id": 30000005,
+        "title": "UX/UI Designer Intern",
+        "company_id": 50000005,
+        "description": "Join our design team to create engaging user experiences and beautiful interfaces for web and mobile applications.",
+        "requirements": ["Design or HCI major", "Figma/Adobe Creative Suite", "Portfolio required"],
+        "posted_date": "2025-09-16",
+        "application_deadline": "2025-10-18",
+        "application_status": "open"
+    },
+    {
+        "id": 30000006,
+        "title": "Cybersecurity Analyst",
+        "company_id": 50000006,
+        "description": "Monitor and protect company systems from security threats. Learn from experienced cybersecurity professionals.",
+        "requirements": ["Computer Science or Cybersecurity major", "Security fundamentals", "Analytical thinking"],
+        "posted_date": "2025-09-17",
+        "application_deadline": "2025-11-01",
+        "application_status": "open"
+    },
+    {
+        "id": 30000007,
+        "title": "Business Development Associate",
+        "company_id": 50000007,
+        "description": "Support business development initiatives and help identify new market opportunities.",
+        "requirements": ["Business Administration major", "Communication skills", "Research abilities"],
+        "posted_date": "2025-09-21",
+        "application_deadline": "2025-11-05",
+        "application_status": "open"
+    },
+    {
+        "id": 30000008,
+        "title": "Research Assistant",
+        "company_id": 50000008,
+        "description": "Assist with laboratory research in biotechnology and pharmaceutical development.",
+        "requirements": ["Biology or Chemistry major", "Lab experience", "Detail-oriented"],
+        "posted_date": "2025-09-14",
+        "application_deadline": "2025-10-12",
+        "application_status": "closed"
+    },
+    {
+        "id": 30000009,
+        "title": "Content Creator Intern",
+        "company_id": 50000009,
+        "description": "Create engaging content for social media platforms and assist with video production.",
+        "requirements": ["Communications or Media major", "Video editing skills", "Social media savvy"],
+        "posted_date": "2025-09-22",
+        "application_deadline": "2025-11-10",
+        "application_status": "open"
+    },
+    {
+        "id": 30000010,
+        "title": "Operations Coordinator",
+        "company_id": 50000010,
+        "description": "Support daily operations and help optimize logistics processes for improved efficiency.",
+        "requirements": ["Operations Management major", "Organizational skills", "Microsoft Office proficiency"],
+        "posted_date": "2025-09-20",
+        "application_deadline": "2025-10-28",
+        "application_status": "open"
+    }
+]

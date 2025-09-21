@@ -1,0 +1,122 @@
+[
+    {
+        "id": 20000001,
+        "user_id": 10000002,
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john.doe@student.edu",
+        "major": "Computer Science",
+        "phone": "(555) 123-4567",
+        "gpa": "3.8"
+    },
+    {
+        "id": 20000002,
+        "user_id": 10000003,
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "email": "jane.smith@student.edu",
+        "major": "Business Administration",
+        "phone": "(555) 234-5678",
+        "gpa": "3.9"
+    },
+    {
+        "id": 20000003,
+        "user_id": 10000004,
+        "first_name": "Mike",
+        "last_name": "Johnson",
+        "email": "mike.johnson@student.edu",
+        "major": "Engineering",
+        "phone": "(555) 345-6789",
+        "gpa": "3.7"
+    },
+    {
+        "id": 20000004,
+        "user_id": 10000005,
+        "first_name": "Sarah",
+        "last_name": "Wilson",
+        "email": "sarah.wilson@student.edu",
+        "major": "Computer Science",
+        "phone": "(555) 456-7890",
+        "gpa": "3.5"
+    },
+    {
+        "id": 20000005,
+        "user_id": 10000006,
+        "first_name": "David",
+        "last_name": "Brown",
+        "email": "david.brown@student.edu",
+        "major": "Marketing",
+        "phone": "(555) 567-8901",
+        "gpa": "3.6"
+    },
+    {
+        "id": 20000006,
+        "user_id": 10000007,
+        "first_name": "Emily",
+        "last_name": "Davis",
+        "email": "emily.davis@student.edu",
+        "major": "Finance",
+        "phone": "(555) 678-9012",
+        "gpa": "3.8"
+    },
+    {
+        "id": 20000007,
+        "user_id": 10000008,
+        "first_name": "Alex",
+        "last_name": "Martinez",
+        "email": "alex.martinez@student.edu",
+        "major": "Design",
+        "phone": "(555) 789-0123",
+        "gpa": "3.4"
+    },
+    {
+        "id": 20000008,
+        "user_id": 10000009,
+        "first_name": "Lisa",
+        "last_name": "Taylor",
+        "email": "lisa.taylor@student.edu",
+        "major": "Biology",
+        "phone": "(555) 890-1234",
+        "gpa": "3.9"
+    },
+    {
+        "id": 20000009,
+        "user_id": 10000010,
+        "first_name": "Chris",
+        "last_name": "Anderson",
+        "email": "chris.anderson@student.edu",
+        "major": "Communications",
+        "phone": "(555) 901-2345",
+        "gpa": "3.3"
+    },
+    {
+        "id": 20000010,
+        "user_id": 10000011,
+        "first_name": "Amanda",
+        "last_name": "Thompson",
+        "email": "amanda.thompson@student.edu",
+        "major": "Operations Management",
+        "phone": "(555) 012-3456",
+        "gpa": "3.7"
+    },
+    {
+        "id": 20000011,
+        "user_id": 10000012,
+        "first_name": "Ryan",
+        "last_name": "Garcia",
+        "email": "ryan.garcia@student.edu",
+        "major": "Cybersecurity",
+        "phone": "(555) 111-2222",
+        "gpa": "3.6"
+    },
+    {
+        "id": 20000012,
+        "user_id": 10000013,
+        "first_name": "Nicole",
+        "last_name": "Lee",
+        "email": "nicole.lee@student.edu",
+        "major": "Statistics",
+        "phone": "(555) 222-3333",
+        "gpa": "3.8"
+    }
+]

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Details - University Job Fair</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <h1>Applicant Details</h1>
+            <div class="nav-links">
+                <button class="nav-toggle" onclick="toggleNavigation()">☰ Menu</button>
+                <span>Welcome, {{ session.full_name }}!</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <div class="navigation-tabs" id="navigationTabs">
+            <div class="tab-container">
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-tab active">
+                    <span class="tab-text">Applicants</span>
+                </a>
+                <a href="{{ url_for('applicant_dashboard') }}" class="nav-tab">
+                    <span class="tab-text">Job Listings</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            <span class="flash-text">{{ message }}</span>
+                            <button class="flash-dismiss" onclick="dismissFlash(this)">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="dashboard-content">
+            <!-- Applicant Header -->
+            <div class="applicant-profile-header">
+                <div class="profile-info">
+                    <h2>{{ applicant.full_name }}</h2>
+                    <p class="profile-major">{{ applicant.major }}</p>
+                    <div class="profile-contact">
+                        <span class="profile-email">{{ applicant.email }}</span>
+                        {% if applicant.phone %}
+                        <span class="profile-phone">{{ applicant.phone }}</span>
+                        {% endif %}
+                        {% if applicant.gpa %}
+                        <span class="profile-gpa">GPA: {{ applicant.gpa }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="back-navigation">
+                    <a href="{{ url_for('admin_dashboard') }}" class="back-button">
+                        ← Back to Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div class="applications-header">
+                <h3>Job Applications</h3>
+                
+                <div class="applications-controls">
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h4>Total Applications</h4>
+                            <p class="stat-number">{{ applicant.applications|length }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sort-controls">
+                        <label for="sortBy">Sort by:</label>
+                        <select id="sortBy" onchange="sortApplications()">
+                            <option value="position">Position Name</option>
+                            <option value="company">Company Name</option>
+                            <option value="date">Application Date</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="applications-list" id="applicationsList">
+                {% if applicant.applications %}
+                    {% for app_detail in applicant.applications %}
+                    <div class="application-item" onclick="viewJobDetail({{ app_detail.job.id }})">
+                        <div class="application-info">
+                            <h3 class="application-title">{{ app_detail.job.title }}</h3>
+                            <p class="application-company">{{ app_detail.job.company }}</p>
+                            <div class="application-details">
+                                <span class="application-date">Applied: {{ app_detail.application.application_date }}</span>
+                                <span class="application-status status-{{ app_detail.application.status }}">
+                                    {{ app_detail.application.status|title }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="application-actions">
+                            <span class="view-detail">View Job →</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-data">
+                        <p>No applications found for this candidate.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        // Store applications data for sorting
+        const applicationsData = {{ applicant.applications|tojson }};
+
+        function viewJobDetail(jobId) {
+            window.location.href = `/job/${jobId}`;
+        }
+
+        function sortApplications() {
+            const sortBy = document.getElementById('sortBy').value;
+            const applicationsList = document.getElementById('applicationsList');
+            
+            // Sort the applications data
+            let sortedApplications = [...applicationsData];
+            
+            switch(sortBy) {
+                case 'position':
+                    sortedApplications.sort((a, b) => a.job.title.localeCompare(b.job.title));
+                    break;
+                case 'company':
+                    sortedApplications.sort((a, b) => a.job.company.localeCompare(b.job.company));
+                    break;
+                case 'date':
+                    sortedApplications.sort((a, b) => new Date(a.application.application_date) - new Date(b.application.application_date));
+                    break;
+            }
+            
+            // Re-render the applications list
+            renderApplicationsList(sortedApplications);
+        }
+
+        function renderApplicationsList(applications) {
+            const applicationsList = document.getElementById('applicationsList');
+            
+            if (applications.length === 0) {
+                applicationsList.innerHTML = '<div class="no-data"><p>No applications found for this candidate.</p></div>';
+                return;
+            }
+            
+            applicationsList.innerHTML = applications.map(app => `
+                <div class="application-item" onclick="viewJobDetail(${app.job.id})">
+                    <div class="application-info">
+                        <h3 class="application-title">${app.job.title}</h3>
+                        <p class="application-company">${app.job.company}</p>
+                        <div class="application-details">
+                            <span class="application-date">Applied: ${app.application.application_date}</span>
+                            <span class="application-status status-${app.application.status}">
+                                ${app.application.status.charAt(0).toUpperCase() + app.application.status.slice(1)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <span class="view-detail">View Job →</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function dismissFlash(button) {
+            const flashMessage = button.parentElement;
+            flashMessage.style.opacity = '0';
+            flashMessage.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                flashMessage.remove();
+                const flashContainer = document.querySelector('.flash-messages');
+                if (flashContainer && flashContainer.children.length === 0) {
+                    flashContainer.remove();
+                }
+            }, 300);
+        }
+
+        // Auto-dismiss flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    const dismissBtn = message.querySelector('.flash-dismiss');
+                    if (dismissBtn && message.parentElement) {
+                        dismissFlash(dismissBtn);
+                    }
+                }, 5000);
+            });
+        });
+
+        function toggleNavigation() {
+            const navTabs = document.getElementById('navigationTabs');
+            navTabs.classList.toggle('show');
+        }
+
+        // Close navigation when clicking outside
+        document.addEventListener('click', function(event) {
+            const navTabs = document.getElementById('navigationTabs');
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            if (!navTabs.contains(event.target) && !navToggle.contains(event.target)) {
+                navTabs.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

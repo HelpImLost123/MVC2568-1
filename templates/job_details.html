@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details - Job Fair Portal</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <h1>Job Listing</h1>
+            <div class="nav-links">
+                <button class="nav-toggle" onclick="toggleNavigation()">☰ Menu</button>
+                <span>Welcome, {{ session.full_name }}!</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <div class="navigation-tabs" id="navigationTabs">
+            <div class="tab-container">
+                {% if session.user_type == 'admin' %}
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-tab">
+                    <span class="tab-text">Applicants</span>
+                </a>
+                <a href="{{ url_for('admin_jobs') }}" class="nav-tab">
+                    <span class="tab-text">Job Listings</span>
+                </a>
+                {% else %}
+                <a href="{{ url_for('applicant_dashboard') }}" class="nav-tab active">
+                    <span class="tab-text">Job Listings</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            <span>{{ message }}</span>
+                            <button class="flash-dismiss" onclick="dismissFlash(this)">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Job Details -->
+        <div class="job-detail-container">
+            <div class="job-detail-header">
+                <h2 class="job-detail-title">{{ job.title }}</h2>
+                <div class="job-detail-company">{{ job.company_name or job.company }}</div>
+                <div class="job-detail-location">📍 {{ job.company_location or job.location }}</div>
+            </div>
+
+            <div class="job-detail-content">
+                <div class="job-detail-section">
+                    <h3>Job Description</h3>
+                    <p class="job-description">{{ job.description }}</p>
+                </div>
+
+                <div class="job-detail-section">
+                    <h3>Requirements</h3>
+                    <ul class="job-requirements">
+                        {% for requirement in job.requirements %}
+                            <li>{{ requirement }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="job-detail-section">
+                    <h3>Important Dates</h3>
+                    <div class="job-detail-dates">
+                        <div class="date-item">
+                            <strong>Posted:</strong> {{ job.posted_date }}
+                        </div>
+                        <div class="date-item">
+                            <strong>Application Deadline:</strong> {{ job.application_deadline }}
+                        </div>
+                    </div>
+                </div>
+
+                {% if session.user_type == 'candidate' %}
+                    <!-- Application Status and Deadline Validation -->
+                    {% if not job_is_open %}
+                        <div class="deadline-expired">
+                            <strong>Application Deadline Passed</strong><br>
+                            This position is no longer accepting applications. The deadline was {{ job.application_deadline }}.
+                        </div>
+                    {% endif %}
+
+                    <div class="job-detail-actions">
+                        {% if has_applied %}
+                            <button class="apply-btn applied" disabled>
+                                ✓ Already Applied
+                            </button>
+                        {% elif not job_is_open %}
+                            <button class="apply-btn disabled" disabled>
+                                Application Closed
+                            </button>
+                        {% else %}
+                            <form method="POST" action="/apply/{{ job.id }}" style="display: inline;">
+                                <button type="submit" class="apply-btn" onclick="return confirm('Are you sure you want to apply to this position?')">
+                                    Apply for this Position
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        function dismissFlash(button) {
+            const flashMessage = button.parentElement;
+            flashMessage.style.opacity = '0';
+            flashMessage.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                flashMessage.remove();
+                const flashContainer = document.querySelector('.flash-messages');
+                if (flashContainer && flashContainer.children.length === 0) {
+                    flashContainer.remove();
+                }
+            }, 300);
+        }
+
+        function toggleNavigation() {
+            const navTabs = document.getElementById('navigationTabs');
+            navTabs.classList.toggle('show');
+        }
+
+        // Close navigation when clicking outside
+        document.addEventListener('click', function(event) {
+            const navTabs = document.getElementById('navigationTabs');
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            if (!navTabs.contains(event.target) && !navToggle.contains(event.target)) {
+                navTabs.classList.remove('show');
+            }
+        });
+
+        // Auto-dismiss flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    const dismissBtn = message.querySelector('.flash-dismiss');
+                    if (dismissBtn && message.parentElement) {
+                        dismissFlash(dismissBtn);
+                    }
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
