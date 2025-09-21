@@ -1,7 +1,3 @@
-# My Flask App
-
-This is a simple Flask application.
-
 ## Prerequisites
 
 Make sure you have Python installed on your machine. You can download it from [python.org](https://www.python.org/downloads/).
