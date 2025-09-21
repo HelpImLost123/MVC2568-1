@@ -124,5 +124,19 @@
         "candidate_id": 20000003,
         "application_date": "2025-09-22",
         "status": "pending"
+    },
+    {
+        "id": 40000019,
+        "candidate_id": 20000001,
+        "job_id": 30000007,
+        "application_date": "2025-09-21",
+        "status": "pending"
+    },
+    {
+        "id": 40000020,
+        "candidate_id": 20000001,
+        "job_id": 30000010,
+        "application_date": "2025-09-21",
+        "status": "pending"
     }
 ]

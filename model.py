@@ -2,35 +2,11 @@
 import json
 import os
 # Define the file paths for our JSON "databases"
-DATA_FILE = 'data.json'
 USERS_FILE = 'users.json'
 JOBS_FILE = 'jobs.json'
 CANDIDATES_FILE = 'candidates.json'
 APPLICATIONS_FILE = 'applications.json'
 COMPANIES_FILE = 'companies.json'
-
-def load_data():
-    """Loads data from the JSON file. Creates an empty file if it doesn't exist."""
-    if not os.path.exists(DATA_FILE):
-        # Create an empty file with an empty list to avoid errors later
-        with open(DATA_FILE, 'w') as f:
-            json.dump([], f)
-        return []
-    try:
-        with open(DATA_FILE, 'r') as f:
-            return json.load(f)
-    except (IOError, json.JSONDecodeError):
-        # Handle file read errors or invalid JSON format
-        print(f"Error: Could not read or decode {DATA_FILE}. Returning an empty list.")
-        return []
-
-def save_data(data):
-    """Saves data to the JSON file."""
-    try:
-        with open(DATA_FILE, 'w') as f:
-            json.dump(data, f, indent=4)
-    except IOError:
-        print(f"Error: Could not save data to {DATA_FILE}.")
 
 def load_users():
     """Loads users data from the JSON file."""

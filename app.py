@@ -1,7 +1,7 @@
 # app.py
 from datetime import datetime
 from flask import Flask, jsonify, request, render_template, session, redirect, url_for, flash
-from model import (load_data, save_data, load_users, save_users, load_jobs, save_jobs, 
+from model import (load_users, save_users, load_jobs, save_jobs, 
                    load_candidates, save_candidates, load_applications, save_applications,
                    load_companies, save_companies, get_company_by_id,
                    authenticate_user, get_applicants, get_applicant_by_id, get_candidate_by_id,
@@ -38,8 +38,6 @@ def email_exists(email):
     """Check if email already exists in candidates."""
     candidates = load_candidates()
     return any(candidate['email'].lower() == email.lower() for candidate in candidates)
-
-data_store = load_data()
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -383,30 +381,10 @@ def apply_to_job(job_id):
     save_applications(applications)
     
     flash('Application submitted successfully!', 'success')
-    return redirect(url_for('job_details', job_id=job_id))
+    return redirect(url_for('applicant_dashboard'))
 
 # API route to get all data from the data_store.
 # This is a Controller function that retrieves data from the Model and returns it.
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    data_store = load_data()
-    return jsonify(data_store)
-
-# API route to add new data to the data_store.
-# This is a Controller function that receives new data from the client,
-# updates the Model, and saves it.
-@app.route('/api/add-data', methods=['POST'])
-def add_data():
-    new_item = request.json
-    # Assign a new ID to the item based on the current data_store
-    new_item['id'] = len(data_store) + 1
-    data_store.append(new_item)
-    
-    # Save the updated data_store to the file using the imported function
-    save_data(data_store)
-    
-    return jsonify({"message": "Item added successfully!", "item": new_item})
-
 # API routes for jobs
 @app.route('/api/jobs', methods=['GET'])
 @login_required
